@@ -1,0 +1,1 @@
+flex_sdk_4.6.0.23201B\bin\mxmlc -target-player=11.1 --incremental=true -output bin\Habbo.swf -source-path src -default-background-color=#000000 -omit-trace-statements=false -optimize=true src\HabboAir.as
