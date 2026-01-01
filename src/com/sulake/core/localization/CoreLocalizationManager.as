@@ -26,7 +26,7 @@
         private var _activeEnvironmentId:String;
         private var _gameDataResources:IGameDataResources;
 
-        public function CoreLocalizationManager(_arg_1:IContext, _arg_2:uint=0, _arg_3:IAssetLibrary=null)
+        public function CoreLocalizationManager(_arg_1:IContext, _arg_2:uint = 0, _arg_3:IAssetLibrary = null)
         {
             super(_arg_1, _arg_2, _arg_3);
         }
@@ -47,7 +47,6 @@
             };
             return (true);
         }
-
 
         override protected function initComponent():void
         {
@@ -115,7 +114,7 @@
             return (getLocalizationDefinition(_activeLocalizationDefinition));
         }
 
-        public function loadLocalizationFromURL(_arg_1:String, _arg_2:String, _arg_3:Boolean=false):void
+        public function loadLocalizationFromURL(_arg_1:String, _arg_2:String, _arg_3:Boolean = false):void
         {
             var hashesUrl:String = _arg_1;
             var environmentId:String = _arg_2;
@@ -127,60 +126,60 @@
                 return;
             };
             var urlLoader:URLLoader = new URLLoader(new URLRequest(hashesUrl));
-            urlLoader.addEventListener("complete", function (_arg_1:Event):void
-            {
-                var _local_4:GameDataResources = null;
-                var _local_5:String = null;
-                var _local_6:IAsset = null;
-                var _local_7:String = null;
-                var _local_3:AssetLoaderStruct = null;
-                var _local_2:String = _arg_1.currentTarget.data;
-                if (((_local_2) && (_local_2.length > 0)))
+            urlLoader.addEventListener("complete", function(_arg_1:Event):void
                 {
-                    try
+                    var _local_4:GameDataResources = null;
+                    var _local_5:String = null;
+                    var _local_6:IAsset = null;
+                    var _local_7:String = null;
+                    var _local_3:AssetLoaderStruct = null;
+                    var _local_2:String = _arg_1.currentTarget.data;
+                    if (((_local_2) && (_local_2.length > 0)))
                     {
-                        _local_4 = GameDataResources.parse(_local_2);
-                        if (!_local_4.isValid())
+                        try
                         {
+                            _local_4 = GameDataResources.parse(_local_2);
+                            if (!_local_4.isValid())
+                            {
+                                events.dispatchEvent(new Event("LOCALIZATION_EVENT_LOCALIZATION_FAILED"));
+                                return;
+                            };
+                            _gameDataResources = _local_4;
+                            _local_5 = ((("localization_" + environmentId.toLowerCase()) + "_") + _local_4.getExternalTextsHash());
+                            _local_6 = assets.getAssetByName(_local_5);
+                            if (((_local_6) && (environmentId == _activeEnvironmentId)))
+                            {
+                                events.dispatchEvent(new Event("LOCALIZATION_EVENT_LOCALIZATION_LOADED"));
+                                return;
+                            };
+                            _activeEnvironmentId = environmentId;
+                            _acceptEmptyMap.remove(_local_5);
+                            _acceptEmptyMap.add(_local_5, acceptEmpty);
+                            _local_7 = ((_local_4.getExternalTextsUrl() + "/") + _local_4.getExternalTextsHash());
+                            Logger.log(("[CoreLocalizationManager] load localization for url: " + _local_7));
+                            _local_3 = assets.loadAssetFromFile(_local_5, new URLRequest(_local_7), "text/plain", ("external_texts_" + environmentId.toLowerCase()), _local_4.getExternalTextsHash());
+                            _local_3.addEventListener("AssetLoaderEventComplete", onLocalizationReady);
+                            _local_3.addEventListener("AssetLoaderEventError", onLocalizationFailed);
+                        }
+                        catch (error:Error)
+                        {
+                            Logger.log("Failed parsing hashes", error.getStackTrace());
                             events.dispatchEvent(new Event("LOCALIZATION_EVENT_LOCALIZATION_FAILED"));
-                            return;
                         };
-                        _gameDataResources = _local_4;
-                        _local_5 = ((("localization_" + environmentId.toLowerCase()) + "_") + _local_4.getExternalTextsHash());
-                        _local_6 = assets.getAssetByName(_local_5);
-                        if (((_local_6) && (environmentId == _activeEnvironmentId)))
-                        {
-                            events.dispatchEvent(new Event("LOCALIZATION_EVENT_LOCALIZATION_LOADED"));
-                            return;
-                        };
-                        _activeEnvironmentId = environmentId;
-                        _acceptEmptyMap.remove(_local_5);
-                        _acceptEmptyMap.add(_local_5, acceptEmpty);
-                        _local_7 = ((_local_4.getExternalTextsUrl() + "/") + _local_4.getExternalTextsHash());
-                        Logger.log(("[CoreLocalizationManager] load localization for url: " + _local_7));
-                        _local_3 = assets.loadAssetFromFile(_local_5, new URLRequest(_local_7), "text/plain", ("external_texts_" + environmentId.toLowerCase()), _local_4.getExternalTextsHash());
-                        _local_3.addEventListener("AssetLoaderEventComplete", onLocalizationReady);
-                        _local_3.addEventListener("AssetLoaderEventError", onLocalizationFailed);
                     }
-                    catch(error:Error)
+                    else
                     {
-                        Logger.log("Failed parsing hashes", error.getStackTrace());
                         events.dispatchEvent(new Event("LOCALIZATION_EVENT_LOCALIZATION_FAILED"));
                     };
-                }
-                else
+                });
+            urlLoader.addEventListener("error", function(_arg_1:Event):void
                 {
                     events.dispatchEvent(new Event("LOCALIZATION_EVENT_LOCALIZATION_FAILED"));
-                };
-            });
-            urlLoader.addEventListener("error", function (_arg_1:Event):void
-            {
-                events.dispatchEvent(new Event("LOCALIZATION_EVENT_LOCALIZATION_FAILED"));
-            });
-            urlLoader.addEventListener("ioError", function (_arg_1:Event):void
-            {
-                events.dispatchEvent(new Event("LOCALIZATION_EVENT_LOCALIZATION_FAILED"));
-            });
+                });
+            urlLoader.addEventListener("ioError", function(_arg_1:Event):void
+                {
+                    events.dispatchEvent(new Event("LOCALIZATION_EVENT_LOCALIZATION_FAILED"));
+                });
         }
 
         private function onLocalizationReady(_arg_1:AssetLoaderEvent):void
@@ -243,7 +242,7 @@
             return (!(_local_2 == null));
         }
 
-        public function getLocalization(_arg_1:String, _arg_2:String=""):String
+        public function getLocalization(_arg_1:String, _arg_2:String = ""):String
         {
             var _local_3:Localization = (_SafeStr_819[_arg_1] as Localization);
             if (_local_3 == null)
@@ -254,7 +253,7 @@
             return (_local_3.value);
         }
 
-        private function getRawValue(_arg_1:String, _arg_2:String=""):String
+        private function getRawValue(_arg_1:String, _arg_2:String = ""):String
         {
             var _local_3:Localization = (_SafeStr_819[_arg_1] as Localization);
             if (_local_3 == null)
@@ -310,7 +309,7 @@
             return (true);
         }
 
-        public function registerParameter(_arg_1:String, _arg_2:String, _arg_3:String, _arg_4:String="%"):String
+        public function registerParameter(_arg_1:String, _arg_2:String, _arg_3:String, _arg_4:String = "%"):String
         {
             var _local_5:Localization = _SafeStr_819[_arg_1];
             if (_local_5 == null)
@@ -403,7 +402,6 @@
             updateAllListeners();
             return (_local_5);
         }
-
 
     }
 }

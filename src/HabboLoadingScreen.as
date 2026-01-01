@@ -9,7 +9,7 @@
     import com.sulake.habbo.localization.HabboLocalizationManager;
     import onBoardingHcUi.LoaderUI;
     import flash.text.TextField;
-//    import flash.desktop.NativeApplication;
+    // import flash.desktop.NativeApplication;
     import flash.utils.Dictionary;
     import com.sulake.core.assets.AssetLibrary;
     import com.sulake.core.assets.IAssetLibrary;
@@ -99,9 +99,9 @@
             _local_13.name = "fileBarSprite";
             _local_5.addChild(_local_13);
             _local_5.visible = true;
-//            var _local_12:XML = NativeApplication.nativeApplication.applicationDescriptor;
-//            var _local_8:Namespace = _local_12.namespace();
-//            var _local_16:String = _local_12._local_8::versionNumber;
+            // var _local_12:XML = NativeApplication.nativeApplication.applicationDescriptor;
+            // var _local_8:Namespace = _local_12.namespace();
+            // var _local_16:String = _local_12._local_8::versionNumber;
             var _local_15:TextField = LoaderUI.createTextField("Habbo Air for Flash", 12, 0x999999, true, false, false, false, "right");
             _local_15.name = "versionTextField";
             addChild(_local_15);
@@ -396,7 +396,6 @@
                 _local_2.text = (Math.round((_arg_1 * 100)) + "%");
             };
         }
-
 
     }
 }

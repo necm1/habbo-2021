@@ -1,6 +1,6 @@
 ﻿package com.sulake.core.localization
 {
-    public class GameDataResources implements IGameDataResources 
+    public class GameDataResources implements IGameDataResources
     {
 
         private var _SafeStr_822:String;
@@ -11,7 +11,6 @@
         private var _furniDataHash:String;
         private var _SafeStr_824:String;
         private var _productDataHash:String;
-
 
         public static function parse(_arg_1:String):GameDataResources
         {
@@ -51,7 +50,6 @@
             };
             return (_local_4);
         }
-
 
         public function isValid():Boolean
         {
@@ -98,7 +96,5 @@
             return (_productDataHash);
         }
 
-
     }
 }
-
