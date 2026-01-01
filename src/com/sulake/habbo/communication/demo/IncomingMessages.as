@@ -69,8 +69,9 @@
             addHabboConnectionMessageEvent(new PingMessageEvent(onPing));
             addHabboConnectionMessageEvent(new DisconnectReasonEvent(onDisconnectReason));
             addHabboConnectionMessageEvent(new ErrorReportEvent(onErrorReport));
-            addHabboConnectionMessageEvent(new InitDiffieHandshakeEvent(onInitDiffieHandshake));
-            addHabboConnectionMessageEvent(new CompleteDiffieHandshakeEvent(onCompleteDiffieHandshake));
+            // TODO: hold that here for a while
+            // addHabboConnectionMessageEvent(new InitDiffieHandshakeEvent(onInitDiffieHandshake));
+            // addHabboConnectionMessageEvent(new CompleteDiffieHandshakeEvent(onCompleteDiffieHandshake));
             addHabboConnectionMessageEvent(new GenericErrorEvent(onGenericError));
             addHabboConnectionMessageEvent(new LoginFailedHotelClosedMessageEvent(onLoginFailedHotelClosed));
             addHabboConnectionMessageEvent(new MaintenanceStatusMessageEvent(onMaintenance));
@@ -287,13 +288,19 @@
             var _local_2:IConnection = _communication.connection;
             if (_local_2 != null)
             {
-                updateRsaData();
                 _SafeStr_659.dispatchLoginStepEvent("HABBO_CONNECTION_EVENT_ESTABLISHED");
                 _SafeStr_1660 = false;
                 _SafeStr_1674 = true;
                 _SafeStr_659.dispatchLoginStepEvent("HABBO_CONNECTION_EVENT_HANDSHAKING");
                 _local_2.sendUnencrypted(new ClientHelloMessageComposer());
-                _local_2.sendUnencrypted(new InitDiffieHandshakeMessageComposer());
+
+                // this triggers sending connection parameters directly, skipping diffie-hellman
+                _SafeStr_1674 = false;
+                _SafeStr_659.dispatchLoginStepEvent("HABBO_CONNECTION_EVENT_HANDSHAKED");
+
+                // start as normal
+                _SafeStr_659.sendConnectionParameters(_local_2);
+                // _local_2.sendUnencrypted(new InitDiffieHandshakeMessageComposer());
             };
         }
 

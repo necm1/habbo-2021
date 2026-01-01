@@ -11,7 +11,7 @@
     import com.sulake.habbo.utils.HabboWebTools;
     import com.sulake.core.assets.loaders.AssetLoaderEvent;
 
-    public class HabboLocalizationManager extends CoreLocalizationManager implements IHabboLocalizationManager 
+    public class HabboLocalizationManager extends CoreLocalizationManager implements IHabboLocalizationManager
     {
 
         private var _SafeStr_2798:Boolean;
@@ -19,7 +19,7 @@
         private var _SafeStr_2799:Dictionary = new Dictionary();
         private var _romanNumerals:Array = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX", "XXI", "XXII", "XXIII", "XXIV", "XXV", "XXVI", "XXVII", "XXVIII", "XXIX", "XXX"];
 
-        public function HabboLocalizationManager(_arg_1:IContext, _arg_2:uint=0, _arg_3:IAssetLibrary=null)
+        public function HabboLocalizationManager(_arg_1:IContext, _arg_2:uint = 0, _arg_3:IAssetLibrary = null)
         {
             _skipExternals = ((_arg_2 & 0x10000000) > 0);
             super(_arg_1, _arg_2, _arg_3);
@@ -49,7 +49,7 @@
             requestLocalizationInit();
         }
 
-        public function loadDefaultEmbedLocalizations(_arg_1:String, _arg_2:Boolean=true):Boolean
+        public function loadDefaultEmbedLocalizations(_arg_1:String, _arg_2:Boolean = true):Boolean
         {
             var _local_3:String = ("default_localizations_" + _arg_1);
             var _local_4:IAsset = assets.getAssetByName(_local_3);
@@ -67,7 +67,7 @@
             return (false);
         }
 
-        public function getLocalizationWithParams(_arg_1:String, _arg_2:String="", ... _args):String
+        public function getLocalizationWithParams(_arg_1:String, _arg_2:String = "", ..._args):String
         {
             var _local_4:int;
             var _local_5:int;
@@ -84,7 +84,7 @@
             return (this.getLocalization(_arg_1, _arg_2));
         }
 
-        public function getLocalizationWithParamMap(_arg_1:String, _arg_2:String="", _arg_3:Map=null):String
+        public function getLocalizationWithParamMap(_arg_1:String, _arg_2:String = "", _arg_3:Map = null):String
         {
             if (_arg_3 != null)
             {
@@ -111,7 +111,7 @@
             return (super.getActiveEnvironmentId());
         }
 
-        override public function getLocalization(_arg_1:String, _arg_2:String=""):String
+        override public function getLocalization(_arg_1:String, _arg_2:String = ""):String
         {
             var _local_3:String = super.getLocalization(_arg_1, _arg_2);
             return (interpolate(_local_3));
@@ -257,7 +257,5 @@
             events.dispatchEvent(new Event("complete"));
         }
 
-
     }
 }
-

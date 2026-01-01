@@ -35,7 +35,7 @@
     import onBoardingHcUi.Button;
     import com.sulake.habbo.utils.CommunicationUtils;
 
-    public class LoginFlow extends Sprite implements ILoginContext, IDisposable, ILoginViewer 
+    public class LoginFlow extends Sprite implements ILoginContext, IDisposable, ILoginViewer
     {
 
         public static const LOGIN_FLOW_FINISHED_EVENT:String = "LOGIN_FLOW_FINISHED_EVENT";
@@ -526,7 +526,7 @@
             };
         }
 
-        public function getProperty(_arg_1:String, _arg_2:Dictionary=null):String
+        public function getProperty(_arg_1:String, _arg_2:Dictionary = null):String
         {
             var _local_3:String = ((_configuration) ? _configuration.getProperty(_arg_1, _arg_2) : "");
             if (((!(_local_3)) || (_local_3.length == 0)))
@@ -577,7 +577,5 @@
             _localization.requestLocalizationInit();
         }
 
-
     }
 }
-
