@@ -1,0 +1,29 @@
+{
+	"type": "app",
+	"config": "flex",
+	"mainClass": "HabboAir",
+	"compilerOptions": {
+		"source-path": [
+			"src/"
+		],
+		"output": "bin/Habbo.swf",
+		"default-frame-rate": 24,
+		"default-background-color": "#000000",
+		"default-size": {
+			"width": 1280,
+			"height": 800
+		},
+		"target-player": "11.1",
+		"accessible": false,
+		"benchmark": false,
+		"optimize": false,
+		"omit-trace-statements": true,
+		"show-unused-type-selector-warnings": true,
+		"strict": true,
+		"use-network": true,
+		"use-resource-bundle-metadata": true,
+		"warnings": true,
+		"verbose-stacktraces": false,
+		"static-link-runtime-shared-libraries": true
+	}
+}
